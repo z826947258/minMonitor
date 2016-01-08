@@ -7,7 +7,7 @@ import org.objectweb.asm.Opcodes;
 /**
  * Created by zhanggan on 12/8/15.
  */
-public class MinMonitorTest extends ClassLoader {
+public class ClassWriterTest extends ClassLoader {
     public static void main(String[] args) throws Exception {
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
         classWriter.visit(Opcodes.V1_7, Opcodes.ACC_PUBLIC, "test/object/TestModel", null, "java/lang/Object", null);
@@ -32,7 +32,7 @@ public class MinMonitorTest extends ClassLoader {
 
         byte[] code = classWriter.toByteArray();
 
-        MinMonitorTest load = new MinMonitorTest();
+        ClassWriterTest load = new ClassWriterTest();
         Class<?> appClass = load.defineClass(null, code, 0, code.length);
         appClass.getMethods()[0].invoke(appClass.newInstance(), new Object[]{});
     }
